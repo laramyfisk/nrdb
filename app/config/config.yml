@@ -81,7 +81,7 @@ fos_user:
         sender_name:    Netrunnerdb
     registration:
         confirmation:
-            enabled:    true # change to true for required email confirmation
+            enabled:    false # change to true for required email confirmation
             template:   FOSUserBundle:Registration:email.txt.twig
     resetting:
         token_ttl: 86400
