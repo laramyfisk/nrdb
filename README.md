@@ -1,3 +1,5 @@
+NB: Information below is not fully correct and kind of deprecated.
+
 # Quick notes for installation
 
 - Create a database in MySQL, in utf8_general_ci
