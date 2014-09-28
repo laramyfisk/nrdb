@@ -2,18 +2,20 @@ DirectoryIndex app.php
 
 RewriteEngine On
 
+RewriteRule app_dev.php [R=404,L]
+
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule ^app\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
 
+RewriteCond %{REQUEST_URI} ^/js/routing(?:\.(js|json))?$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:fos_js_routing_js,E=_ROUTING_param__format:%1,E=_ROUTING_default__controller:fos_js_routing.controller\:indexAction,E=_ROUTING_default__format:js]
 
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule .? - [L]
 
-#RewriteRule assets/(.+) /src/Alsciende/NetrunnerBundle/Resources/public/$1 [L]
-RewriteRule assets/(.+) /web/bundles/netrunnerdbcards/$1 [L]
-
-
-RewriteRule ^(.*)$ /web/app_dev.php [QSA,L]
+RewriteRule web/(.*) $1 [L]
+RewriteRule ^(.*)$ app.php [QSA,L]
+#RewriteRule ^(.*)$ app_dev.php [QSA,L]
 
 ExpiresActive On
 ExpiresByType image/png "access plus 1 month"
@@ -25,5 +27,3 @@ ExpiresByType application/x-font-woff "access plus 1 month"
 ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
 ExpiresByType application/x-font-ttf "access plus 1 month"
 ExpiresByType image/svg+xml "access plus 1 month"
-
-
